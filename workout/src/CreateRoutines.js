@@ -3,6 +3,7 @@ import './App.css';
 import CreateRoutine from './CreateRoutine';
 
 import firebase from 'firebase';
+import {NotificationManager} from "react-notifications";
 const db = firebase.firestore();
 
 
@@ -62,7 +63,11 @@ class CreateRoutines extends Component {
         }
     }
 
-
+    createNotification = (type,msg) => {
+        return () => {
+            NotificationManager.success(msg);
+        };
+    };
 
     saveRoutine = ()=>{
 
@@ -75,6 +80,8 @@ class CreateRoutines extends Component {
             .add({
                 routine
             });
+
+        this.createNotification('success','Routine added to the database');
     }
 
     render (){
@@ -109,7 +116,8 @@ class CreateRoutines extends Component {
             <div>
                 <div className="form-inline col-md-8" style={{marginTop:'15px'}}>
                     <input className="form-control mr-sm-2 col-md-6" type="input" placeholder="Routine Name" id="routineName" />
-                    <button className="btn btn-outline-primary my-2 my-sm-0" onClick={this.saveRoutine}>Save</button>
+                    <button className="btn btn-outline-primary my-2 my-sm-0"
+                            onClick={()=> {this.saveRoutine();this.createNotification('success','Routine added to the database')}}>Save</button>
                 </div>
                 <div>
                     {days}

@@ -50,27 +50,25 @@ class Workout extends Component{
 
         return (
             <div>
-                <Card style={{backgroundColor:"aliceblue",height:'32em'}} >
+                <Card style={{height:'32em'}} >
                     <Card.Header>
-                        <div>
-                            <Card.Title>
-                                {likeButton}{c.type}&nbsp;body<span className="tiny" style={{float:'right'}}>{c.phase}</span>
-                            </Card.Title>
-                        </div>
+                        <Card.Title>
+                            {likeButton}{c.type}&nbsp;body<span className="tiny" style={{float:'right'}}>{c.phase}</span>
+                        </Card.Title>
                     </Card.Header>
                     <Card.Text style={{backgroundColor:"white"}}>
                         <Card.Subtitle>
                             Muscles trained
                         </Card.Subtitle>
-                        <ol>
+                        <ul>
                             {muscles}
-                        </ol>
+                        </ul>
                         <Card.Subtitle>
                             Exercises
                         </Card.Subtitle>
-                        <ol>
+                        <ul>
                             {exercises}
-                        </ol>
+                        </ul>
                     </Card.Text>
                 </Card>
             </div>

@@ -8,7 +8,10 @@ import Workouts from './Workouts';
 import CreateRoutines from './CreateRoutines';
 import ViewRoutines from './ViewRoutines';
 
+import logo from './barbell.png';
+import {NotificationContainer} from "react-notifications";
 const db = firebase.firestore();
+const FA = require('react-fontawesome');
 
 
 
@@ -96,16 +99,21 @@ class App extends  React.Component{
     return (
         <div>
           <Router>
-            <nav className="navbar" style={{backgroundColor:"#282c34"}}>
+            <nav className="navbar" style={{backgroundColor: "#282c34"}}>
+
+                <h3 className="text-primary" style={{fontVariant: 'small-caps'}}><img src={logo} className="App-logo" alt="logo" style={{marginRight:'10px'}}/>Workout Planner</h3>
+                <div className="text-success h4">
+                    <NotificationContainer />
+                </div>
                 <ButtonGroup>
                   <Link to="/">
-                      <button className="btn btn-outline-primary my-2 my-sm-0" style={{width:'130px'}}>Workouts</button>
+                      <button className="btn btn-outline-primary my-2 my-sm-0" style={{width:'200px'}}>Workout Library</button>
                   </Link>
                     <Link to="/create">
-                    <button className="btn btn-outline-primary my-2 my-sm-0" style={{width:'130px'}}>Contribute</button>
+                    <button className="btn btn-outline-primary my-2 my-sm-0" style={{width:'200px'}}>Create a Workout</button>
                 </Link>
                     <Link to="/routines">
-                        <button className="btn btn-outline-primary my-2 my-sm-0" style={{width:'130px'}}>Routines</button>
+                        <button className="btn btn-outline-primary my-2 my-sm-0" style={{width:'200px'}}>Routine Library</button>
                     </Link>
                 </ButtonGroup>
             </nav>

@@ -62,7 +62,7 @@ const ViewRoutine =(props) =>{
         <GridList cols={8}>
 
             <div className="col-md-1">
-                <i>{props.routine.routineName}</i>
+                <i className="h5 text-primary" style={{font:'normal'}}>{props.routine.routineName}</i>
             </div>
             {week}
         </GridList>

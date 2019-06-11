@@ -30,11 +30,7 @@ class ViewRoutines extends React.Component {
 
         return (
             <div>
-
-                    {routines}
-
-
-
+                {routines}
             </div>
         )
     }

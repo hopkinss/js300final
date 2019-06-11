@@ -19,7 +19,7 @@ import {GridListTile,GridListTileBar,GridList} from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
     card: {
-        maxWidth: 345,
+        maxWidth: 300,
     },
     media: {
         height: 0,

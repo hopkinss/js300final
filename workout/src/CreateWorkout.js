@@ -4,22 +4,23 @@ import firebase from 'firebase';
 import Select from 'react-select';
 import { InputGroup,FormControl,Form} from 'react-bootstrap';
 import Muscles from './Muscles';
-import Exercises from "./Exercises";
+import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 const db = firebase.firestore();
 
-
 class CreateWorkout extends Component {
+
+    initialState = {
+        type: null,
+        phase: null,
+        muscles: [],
+        exercises: []
+    };
 
     constructor(props) {
         super(props);
 
-        this.state = {
-            type: null,
-            phase: null,
-            muscles: [],
-            exercises: []
-        }
+        this.state =  this.initialState
     }
 
     changeType = (type) => {
@@ -44,9 +45,13 @@ class CreateWorkout extends Component {
 
 
         if (workout){
-            this.addWorkout(workout)
+            this.addWorkout(workout,e)
+            e.target.reset();
+            this.createNotification('success','test');
         }
     }
+
+
 
 
     // Return a list of exercises for the selected muscle groups
@@ -73,7 +78,16 @@ class CreateWorkout extends Component {
             .add({
                 workout
             });
+        this.createNotification('success','Record added to the database');
     }
+
+    createNotification = (type,msg) => {
+        return () => {
+            NotificationManager.success(msg);
+        };
+    };
+
+
 
     render() {
 
@@ -91,10 +105,10 @@ class CreateWorkout extends Component {
 
         return  (
             <div style={{margin:"2%"}}>
-                <form onSubmit={this.getWorkoutDetails} >
 
+                <form onSubmit={this.getWorkoutDetails.bind(this)}>
                 <div className="container-fluid App">
-                    <h1 style={{textAlign:'left'}}>Design a workout</h1>
+                    <h3 className="text-primary" style={{fontVariant: 'small-caps',textAlign:'left'}}>Design a workout</h3>
                     <div className="row">
                         <div className="col-md-6">
                             <InputGroup className="mb-3">
@@ -127,11 +141,20 @@ class CreateWorkout extends Component {
                     <div className="row">
                         <div className="col-md-8">
                             <Muscles onChangeMuscles={this.setMuscles} onChangeExercises={this.setExercises} filter={this.state.muscles}/>
+
                         </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-md-1">
+                            <button className="btn btn-outline-primary my-2 my-sm-0"
+                                    onClick={this.createNotification('success','Workout added to the database')}
+                                    type="submit">Create</button>
+                        </div>
+
                     </div>
 
                 </div>
-                 <button type="submit">Add</button>
+
                 </form>
 
             </div>
